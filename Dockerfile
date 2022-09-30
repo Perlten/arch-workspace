@@ -20,6 +20,8 @@ RUN pacman -S htop --noconfirm
 RUN pacman -S openssh --noconfirm
 RUN pacman -S which --noconfirm
 RUN pacman -S clang --noconfirm
+RUN pacman -S make --noconfirm
+RUN pacman -S cmake --noconfirm
 
 RUN  sed -i "s|# %sudo.ALL=(ALL:ALL) ALL|%sudo ALL=(ALL:ALL) ALL|g" /etc/sudoers
 
@@ -45,3 +47,11 @@ RUN nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 RUN nvim --headless -c "MasonInstall pyright" -c "qall"
 RUN nvim --headless -c "MasonInstall flake8" -c "qall"
 RUN nvim --headless -c "MasonInstall black" -c "qall"
+
+# compiles fzf for telescope error if not
+RUN cd ~/.local/share/nvim/site/pack/packer/opt/telescope-fzf-native.nvim && mkdir -p build && cd build
+WORKDIR /home/perlt/.local/share/nvim/site/pack/packer/opt/telescope-fzf-native.nvim/build
+RUN cmake .. && make
+RUN echo perlt | sudo -S cp libfzf.so /usr/local/lib
+
+WORKDIR /home/perlt
