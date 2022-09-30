@@ -17,6 +17,7 @@ RUN pacman -S unzip --noconfirm
 RUN pacman -S fzf --noconfirm
 RUN pacman -S ripgrep --noconfirm
 RUN pacman -S htop --noconfirm
+RUN pacman -S openssh --noconfirm
 
 RUN  sed -i "s|# %sudo.ALL=(ALL:ALL) ALL|%sudo ALL=(ALL:ALL) ALL|g" /etc/sudoers
 
