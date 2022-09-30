@@ -33,6 +33,8 @@ WORKDIR /home/perlt
 
 RUN bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
 
+RUN git config --global core.editor "neovim"
+
 RUN git clone https://github.com/AstroNvim/AstroNvim ~/.config/nvim
 RUN git clone https://github.com/Perlten/astrovim-config.git ~/.config/nvim/lua/user
 
