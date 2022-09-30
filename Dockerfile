@@ -41,6 +41,3 @@ RUN nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 RUN nvim --headless -c "MasonInstall pyright" -c "qall"
 RUN nvim --headless -c "MasonInstall flake8" -c "qall"
 RUN nvim --headless -c "MasonInstall black" -c "qall"
-
-RUN touch test.py
-
