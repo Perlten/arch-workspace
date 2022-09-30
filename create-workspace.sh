@@ -21,8 +21,6 @@ read mountSSH
 
 mountSSHCommand="-v $HOME/.ssh:/home/perlt/.ssh"
 mountVolumeCommand="-v $volumeLocationHost:/home/perlt/$volumeLocationContainer"
-echo $mountSSHCommand
-echo $mountVolumeCommand
 
 
 if [[ "$OSTYPE" == "msys"* ]]; then

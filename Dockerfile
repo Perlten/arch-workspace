@@ -47,6 +47,8 @@ RUN nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 RUN nvim --headless -c "MasonInstall pyright" -c "qall"
 RUN nvim --headless -c "MasonInstall flake8" -c "qall"
 RUN nvim --headless -c "MasonInstall black" -c "qall"
+RUN nvim --headless -c "MasonInstall bash-language-server" -c "qall"
+RUN nvim --headless -c "MasonInstall shellcheck" -c "qall"
 
 # compiles fzf for telescope error if not
 RUN cd ~/.local/share/nvim/site/pack/packer/opt/telescope-fzf-native.nvim && mkdir -p build && cd build
