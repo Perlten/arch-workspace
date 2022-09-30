@@ -19,6 +19,7 @@ RUN pacman -S ripgrep --noconfirm
 RUN pacman -S htop --noconfirm
 RUN pacman -S openssh --noconfirm
 RUN pacman -S which --noconfirm
+RUN pacman -S clang --noconfirm
 
 RUN  sed -i "s|# %sudo.ALL=(ALL:ALL) ALL|%sudo ALL=(ALL:ALL) ALL|g" /etc/sudoers
 
