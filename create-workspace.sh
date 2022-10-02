@@ -22,7 +22,7 @@ mountSSHCommand="-v $HOME/.ssh:/home/perlt/.ssh"
 mountVolumeCommand="-v $volumeLocationHost:/home/perlt/$volumeLocationContainer"
 
 if [[ "$OSTYPE" == "msys"* ]]; then
-	MSYS_NO_PATHCONV=1 docker run -d --name $workspaceName $mountVolumeCommand $mountSSHCommand -it arch-workspace
+	MSYS_NO_PATHCONV=1 docker run -v //var/run/docker.sock:/var/run/docker.sock -d --name $workspaceName $mountVolumeCommand $mountSSHCommand -it arch-workspace
 else
-	docker run -d --name $workspaceName $mountVolumeCommand $mountSSHCommand -it arch-workspace
+	docker run -v /var/run/docker.sock:/var/run/docker.sock -d --name $workspaceName $mountVolumeCommand $mountSSHCommand -it arch-workspace
 fi
