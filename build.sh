@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build --no-cache -t arch-workspace .
+docker build -t arch-workspace .

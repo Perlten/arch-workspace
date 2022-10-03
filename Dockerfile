@@ -39,6 +39,9 @@ WORKDIR /home/${username}
 
 RUN bash -c "$(wget https://raw.githubusercontent.com/ohmybash/oh-my-bash/master/tools/install.sh -O -)"
 
+RUN mkdir ~/bin
+RUN echo "export PATH="~/bin:$PATH"" >> ~/.bashrc
+
 RUN git config --global core.editor "nvim"
 
 RUN git clone -b nightly https://github.com/AstroNvim/AstroNvim ~/.config/nvim
@@ -61,8 +64,5 @@ RUN echo ${password} | sudo -S cp libfzf.so /usr/local/lib
 
 WORKDIR /home/${username}
 
-RUN wget -P ~/bin  https://raw.githubusercontent.com/excalibur1234/pacui/master/pacui 
-RUN chmod +x ~/bin/pacui
-RUN echo "export PATH="~/bin:$PATH"" >> ~/.bashrc
-
 RUN git clone https://aur.archlinux.org/yay.git && cd yay && sshpass -p ${password} makepkg -si --noconfirm
+RUN git clone https://github.com/moson-mo/pacseek.git && cd pacseek && go build . && cp ./pacseek ~/bin/pacseek
