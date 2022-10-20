@@ -1,6 +1,9 @@
 #!/bin/bash
 echo "name of workspace"
+
 read workspaceName
+workspaceName="${workspaceName,,}"
+
 echo "Volume to mount(absolute path)"
 
 volumeLocationHost=""
