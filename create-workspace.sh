@@ -18,11 +18,13 @@ read volumeLocationContainer
 echo "Mount shh keys? (yes/no)"
 read mountSSH
 
+docker build -t $workspaceName-image .
+
 mountSSHCommand="-v $HOME/.ssh:/home/perlt/.ssh"
 mountVolumeCommand="-v $volumeLocationHost:/home/perlt/$volumeLocationContainer"
 
 if [[ "$OSTYPE" == "msys"* ]]; then
-	MSYS_NO_PATHCONV=1 docker run -v //var/run/docker.sock:/var/run/docker.sock -d --name $workspaceName $mountVolumeCommand $mountSSHCommand -it arch-workspace
+	MSYS_NO_PATHCONV=1 docker run -v //var/run/docker.sock:/var/run/docker.sock -d --name $workspaceName $mountVolumeCommand $mountSSHCommand -it $workspaceName-image
 else
-	docker run -v /var/run/docker.sock:/var/run/docker.sock -d --name $workspaceName $mountVolumeCommand $mountSSHCommand -it arch-workspace
+	docker run -v /var/run/docker.sock:/var/run/docker.sock -d --name $workspaceName $mountVolumeCommand $mountSSHCommand -it $workspaceName-image
 fi
