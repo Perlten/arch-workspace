@@ -21,7 +21,7 @@ read volumeLocationContainer
 echo "Mount shh keys? (yes/no)"
 read mountSSH
 
-docker build -t $workspaceName-image .
+docker build --no-cache -t $workspaceName-image .
 
 mountSSHCommand="-v $HOME/.ssh:/home/perlt/.ssh"
 mountVolumeCommand="-v $volumeLocationHost:/home/perlt/$volumeLocationContainer"
