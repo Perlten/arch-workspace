@@ -44,24 +44,6 @@ RUN echo "export PATH="~/bin:$PATH"" >> ~/.bashrc
 
 RUN git config --global core.editor "nvim"
 
-RUN git clone -b nightly https://github.com/AstroNvim/AstroNvim ~/.config/nvim
-RUN git clone https://github.com/perlten/astrovim-config.git ~/.config/nvim/lua/user
-
-RUN nvim  --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-
-RUN nvim --headless -c "MasonInstall pyright" -c "qall"
-RUN nvim --headless -c "MasonInstall flake8" -c "qall"
-RUN nvim --headless -c "MasonInstall black" -c "qall"
-RUN nvim --headless -c "MasonInstall bash-language-server" -c "qall"
-RUN nvim --headless -c "MasonInstall shellcheck" -c "qall"
-RUN nvim --headless -c "MasonInstall shfmt" -c "qall"
-
-# compiles fzf for telescope, error if not
-RUN cd ~/.local/share/nvim/site/pack/packer/opt/telescope-fzf-native.nvim && mkdir -p build && cd build
-WORKDIR /home/${username}/.local/share/nvim/site/pack/packer/opt/telescope-fzf-native.nvim/build
-RUN cmake .. && make
-RUN echo ${password} | sudo -S cp libfzf.so /usr/local/lib
-
 WORKDIR /home/${username}
 
 RUN git clone https://aur.archlinux.org/yay.git && cd yay && sshpass -p ${password} makepkg -si --noconfirm
