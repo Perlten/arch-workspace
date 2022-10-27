@@ -25,7 +25,7 @@ RUN pacman -S cmake --noconfirm
 RUN pacman -S go --noconfirm
 RUN pacman -S sshpass --noconfirm
 
-RUN  sed -i "s|# %sudo.ALL=(ALL:ALL) ALL|%sudo ALL=(ALL:ALL) ALL|g" /etc/sudoers
+RUN sed -i "s|# %sudo.ALL=(ALL:ALL) ALL|%sudo ALL=(ALL:ALL) ALL|g" /etc/sudoers
 
 RUN useradd -ms /bin/bash ${username}
 

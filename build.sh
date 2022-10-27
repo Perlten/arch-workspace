@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t arch-workspace .
+docker build -t perlt/workspace .
