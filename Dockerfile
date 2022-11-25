@@ -25,14 +25,13 @@ RUN pacman -S cmake --noconfirm
 RUN pacman -S go --noconfirm
 RUN pacman -S sshpass --noconfirm
 
-RUN sed -i "s|# %sudo.ALL=(ALL:ALL) ALL|%sudo ALL=(ALL:ALL) ALL|g" /etc/sudoers
-
 RUN useradd -ms /bin/bash ${username}
 
 RUN echo "${username}:${password}" | chpasswd
 
 RUN groupadd sudo
 RUN usermod -aG sudo ${username}
+RUN echo "perlt ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 USER ${username}
 WORKDIR /home/${username}
