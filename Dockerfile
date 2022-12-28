@@ -1,37 +1,20 @@
-FROM archlinux
+FROM alpine:latest
 
 ARG password="perlt"
 ARG username="perlt"
 
-RUN pacman -Sy
-RUN pacman -S base-devel --noconfirm
-RUN pacman -S vi --noconfirm
-RUN pacman -S vim --noconfirm
-RUN pacman -S wget --noconfirm
-RUN pacman -S neovim --noconfirm
-RUN pacman -S git --noconfirm
-RUN pacman -S ranger --noconfirm
-RUN pacman -S python-pynvim --noconfirm
-RUN pacman -S python-pip --noconfirm   
-RUN pacman -S python-setuptools --noconfirm
-RUN pacman -S nodejs --noconfirm
-RUN pacman -S npm --noconfirm
-RUN pacman -S unzip --noconfirm
-RUN pacman -S fzf --noconfirm
-RUN pacman -S ripgrep --noconfirm
-RUN pacman -S htop --noconfirm
-RUN pacman -S openssh --noconfirm
-RUN pacman -S cmake --noconfirm
-RUN pacman -S go --noconfirm
-RUN pacman -S sshpass --noconfirm
+RUN apk update
+RUN apk upgrade
+RUN apk add bash
+RUN apk add sudo
+RUN apk add git
+RUN apk add wget
+RUN apk add neovim
 
-RUN useradd -ms /bin/bash ${username}
+RUN adduser -S -D ${username}
 
-RUN echo "${username}:${password}" | chpasswd
-
-RUN groupadd sudo
-RUN usermod -aG sudo ${username}
-RUN echo "perlt ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN echo '%wheel ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/wheel
+RUN adduser ${username} wheel
 
 USER ${username}
 WORKDIR /home/${username}
@@ -44,6 +27,3 @@ RUN echo "export PATH="~/bin:$PATH"" >> ~/.bashrc
 RUN git config --global core.editor "nvim"
 
 WORKDIR /home/${username}
-
-RUN git clone https://aur.archlinux.org/yay.git && cd yay && sshpass -p ${password} makepkg -si --noconfirm
-RUN git clone https://github.com/moson-mo/pacseek.git && cd pacseek && go build . && cp ./pacseek ~/bin/pacseek
