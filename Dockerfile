@@ -5,11 +5,14 @@ ARG username="perlt"
 
 RUN apk update
 RUN apk upgrade
+
 RUN apk add bash
 RUN apk add sudo
 RUN apk add git
 RUN apk add wget
 RUN apk add neovim
+RUN apk add build-base
+RUN apk add curl
 
 RUN adduser -S -D ${username}
 
